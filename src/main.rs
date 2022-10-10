@@ -1,8 +1,17 @@
+use proconio::input;
+
 fn main() {
     let (m1, m2) = input_pattern01();
 
     println!("{:?}", m1);
     println!("{:?}", m2);
+
+    input! {
+        n: u8,
+        m: u32,
+        l: i32,
+    }
+    println!("{}, {}, {}", n, m, l);
 }
 
 fn input_pattern01() -> (Vec<i32>, Vec<i32>) {
