@@ -1,4 +1,19 @@
 fn main() {
+    let (m1, m2) = input_pattern01();
+
+    println!("{:?}", m1);
+    println!("{:?}", m2);
+}
+
+fn input_pattern01() -> (Vec<i32>, Vec<i32>) {
+    //
+    // 最初に要素数を入力
+    // 次に複数の値を入力
+    // 3
+    // 1 2
+    // 3 4
+    // 5 6
+    //
     let s = {
         let mut s = String::new();
         std::io::stdin().read_line(&mut s).unwrap();
@@ -29,6 +44,5 @@ fn main() {
         m2.push(m);
     }
 
-    println!("{:?}", m1);
-    println!("{:?}", m2);
+    return (m1, m2);
 }
