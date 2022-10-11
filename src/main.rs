@@ -3,7 +3,34 @@ use proconio::input;
 fn main() {
     input! {
         n: usize,
-        a: [[i32; n]; n],
+        m: usize,
+        a: [[u32]; m],
+    }
+
+    let mut chk: Vec<Vec<bool>> = Vec::new();
+    for _ in 0..n {
+        chk.push(vec![false; n]);
+    }
+
+    for i in 0..m {
+        for j in 0..a[i].len() {
+            for k in (j + 1)..a[i].len() {
+                chk[(a[i][j] - 1) as usize][(a[i][k] - 1) as usize] = true;
+            }
+        }
+    }
+
+    let mut ans = true;
+    for i in 0..n {
+        for j in (i + 1)..n {
+            ans &= chk[i][j];
+        }
+    }
+
+    if ans {
+        println!("Yes");
+    } else {
+        println!("No");
     }
 }
 
