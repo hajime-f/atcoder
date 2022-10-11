@@ -3,34 +3,52 @@ use proconio::input;
 fn main() {
     input! {
         n: usize,
-        m: usize,
-        a: [[u32]; m],
+        mut a: [u32; n],
     }
 
-    let mut chk: Vec<Vec<bool>> = Vec::new();
-    for _ in 0..n {
-        chk.push(vec![false; n]);
-    }
+    a.sort_by(|a, b| b.partial_cmp(a).unwrap());
 
-    for i in 0..m {
-        for j in 0..a[i].len() {
-            for k in (j + 1)..a[i].len() {
-                chk[(a[i][j] - 1) as usize][(a[i][k] - 1) as usize] = true;
-            }
-        }
-    }
+    let mut even: Vec<u32> = Vec::new();
+    let mut odd: Vec<u32> = Vec::new();
 
-    let mut ans = true;
     for i in 0..n {
-        for j in (i + 1)..n {
-            ans &= chk[i][j];
+        if a[i] % 2 == 0 {
+            even.push(a[i]);
+        } else {
+            odd.push(a[i]);
         }
     }
 
-    if ans {
-        println!("Yes");
+    let max1: i32;
+    let max2: i32;
+
+    if even.len() == 0 {
+        max1 = -1;
+    } else if even.len() == 1 {
+        max1 = even[0] as i32;
     } else {
-        println!("No");
+        max1 = (even[0] + even[1]) as i32;
+    }
+
+    if odd.len() == 0 {
+        max2 = -1;
+    } else if odd.len() == 1 {
+        max2 = -1;
+    } else {
+        max2 = (odd[0] + odd[1]) as i32;
+    }
+
+    if ((max1 == -1) && (max2 == -1)) || ((max1 == 0) && (max2 == -1)) {
+        println!("-1");
+    } else {
+        let max = {
+            if max1 > max2 {
+                max1
+            } else {
+                max2
+            }
+        };
+        println!("{}", max);
     }
 }
 
