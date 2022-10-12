@@ -3,9 +3,23 @@ use proconio::input;
 fn main() {
     input! {
         n: u32,
-        a: [u32; n],
         q: u32,
+        a: [u32; n],
         x: [[u32; 2]; q],
+    }
+
+    let mut m: Vec<u32> = Vec::new();
+
+    m.push(0);
+    for i in 1..=n {
+        m.push(m[(i - 1) as usize] + a[(i - 1) as usize]);
+    }
+
+    for i in 0..q {
+        println!(
+            "{}",
+            m[x[i as usize][1] as usize] - m[(x[i as usize][0] - 1) as usize]
+        );
     }
 }
 

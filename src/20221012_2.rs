@@ -7,6 +7,34 @@ fn main() {
         q: u32,
         x: [[u32; 2]; q],
     }
+
+    let mut m1: Vec<u32> = Vec::new();
+    let mut m2: Vec<u32> = Vec::new();
+
+    m1.push(0);
+    m2.push(0);
+    for i in 1..=n {
+        if a[(i - 1) as usize] == 1 {
+            m1.push(m1[(i - 1) as usize] + 1);
+            m2.push(m2[(i - 1) as usize]);
+        } else {
+            m1.push(m1[(i - 1) as usize]);
+            m2.push(m2[(i - 1) as usize] + 1);
+        }
+    }
+
+    for i in 0..q {
+        let atari = m1[x[i as usize][1] as usize] - m1[(x[i as usize][0] - 1) as usize];
+        let hazure = m2[x[i as usize][1] as usize] - m2[(x[i as usize][0] - 1) as usize];
+
+        if atari > hazure {
+            println!("win");
+        } else if atari == hazure {
+            println!("draw");
+        } else {
+            println!("lose");
+        }
+    }
 }
 
 // let mut v = vec![0; 2];  // 要素数2のベクタを0で初期化
