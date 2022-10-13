@@ -1,25 +1,29 @@
 use proconio::input;
-use std::cmp;
 
 fn main() {
     input! {
+        d: u32,
         n: u32,
-        h: [i32; n],
+        x: [[u32; 2]; n],
     }
 
-    let mut dp: Vec<i32> = Vec::new();
-
-    dp.push(0);
-    dp.push((h[1] - h[0]).abs());
-
-    for i in 2..n {
-        dp.push(cmp::min(
-            dp[(i - 1) as usize] + (h[i as usize] - h[(i - 1) as usize]).abs(),
-            dp[(i - 2) as usize] + (h[i as usize] - h[(i - 2) as usize]).abs(),
-        ));
+    let mut v: Vec<i32> = Vec::new();
+    for _ in 0..=d {
+        v.push(0);
     }
 
-    println!("{}", dp[(n - 1) as usize]);
+    for i in 0..n {
+        v[(x[i as usize][0] - 1) as usize] += 1;
+        v[x[i as usize][1] as usize] -= 1;
+    }
+
+    let mut ans: Vec<i32> = Vec::new();
+    ans.push(v[0]);
+    println!("{}", ans[0]);
+    for i in 1..d {
+        ans.push(ans[(i - 1) as usize] + v[i as usize]);
+        println!("{}", ans[i as usize]);
+    }
 }
 
 // let mut v = vec![0; 2];  // 要素数2のベクタを0で初期化

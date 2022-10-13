@@ -4,21 +4,20 @@ use std::cmp;
 fn main() {
     input! {
         n: u32,
-        h: [i32; n],
+        a: [u32; n - 1],
+        b: [u32; n - 2],
     }
 
-    let mut dp: Vec<i32> = Vec::new();
+    let mut dp: Vec<u32> = Vec::new();
 
     dp.push(0);
-    dp.push((h[1] - h[0]).abs());
-
+    dp.push(a[0]);
     for i in 2..n {
         dp.push(cmp::min(
-            dp[(i - 1) as usize] + (h[i as usize] - h[(i - 1) as usize]).abs(),
-            dp[(i - 2) as usize] + (h[i as usize] - h[(i - 2) as usize]).abs(),
+            dp[(i - 1) as usize] + a[(i - 1) as usize],
+            dp[(i - 2) as usize] + b[(i - 2) as usize],
         ));
     }
-
     println!("{}", dp[(n - 1) as usize]);
 }
 
