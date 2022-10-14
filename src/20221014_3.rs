@@ -3,37 +3,25 @@ use proconio::input;
 fn main() {
     input! {
         n: u32,
-        a: [u32; n],
-        q: u32,
-        x: [[u32; 2]; q],
+        k: u32,
+        p: [u32; n],
+        q: [u32; n],
     }
 
-    let mut atari: Vec<u32> = Vec::new();
-    let mut hazure: Vec<u32> = Vec::new();
+    let mut ans: bool = false;
 
-    atari.push(0);
-    hazure.push(0);
     for i in 0..n {
-        if a[i as usize] == 1 {
-            atari.push(atari[i as usize] + 1);
-            hazure.push(hazure[i as usize]);
-        } else {
-            atari.push(atari[i as usize]);
-            hazure.push(hazure[i as usize] + 1);
+        for j in 0..n {
+            if p[i as usize] + q[j as usize] == k {
+                ans = true;
+            }
         }
     }
 
-    for i in 0..q {
-        let m1 = atari[x[i as usize][1] as usize] - atari[(x[i as usize][0] - 1) as usize];
-        let m2 = hazure[x[i as usize][1] as usize] - hazure[(x[i as usize][0] - 1) as usize];
-
-        if m1 > m2 {
-            println!("win");
-        } else if m1 == m2 {
-            println!("draw");
-        } else {
-            println!("lose");
-        }
+    if ans {
+        println!("Yes");
+    } else {
+        println!("No")
     }
 }
 
@@ -73,5 +61,3 @@ fn main() {
 
 //     println!("{:?}", num1 + num2 + num3);
 // }
-
-// let m = s.chars().nth(i).unwrap() as i32 - 48;
