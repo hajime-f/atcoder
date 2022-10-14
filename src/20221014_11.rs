@@ -2,16 +2,21 @@ use proconio::input;
 
 fn main() {
     input! {
+        t: usize,
         n: usize,
-        q: usize,
-        l: usize,
-        a: [[u32; 200000]; n],
-        x: [[u32; 2]; q],
+        x: [[u32; 2]; n],
     }
 
-    for i in 0..q {
-        let ans = a[(x[i as usize][0] - 1) as usize][x[i as usize][1] as usize];
-        println!("{}", ans);
+    let mut v = vec![0; t + 1];
+    for i in 0..n {
+        v[x[i as usize][0] as usize] += 1;
+        v[x[i as usize][1] as usize] -= 1;
+    }
+
+    let mut sum: i32 = 0;
+    for i in 0..t {
+        sum += v[i as usize];
+        println!("{}", sum);
     }
 }
 
