@@ -11,7 +11,7 @@ fn main() {
     for i in 1..=k {
         let base_number: f64 = base.pow(i as u32).into();
         let rounded = ((x as f64 / base_number) as f64).round() * base_number;
-        x = rounded as i64;
+        x = rounded;
     }
     println!("{}", x);
 }

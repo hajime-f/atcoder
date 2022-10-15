@@ -2,18 +2,15 @@ use proconio::input;
 
 fn main() {
     input! {
-        mut x: i64,
-        k: usize,
+        n: usize,
     }
 
-    let base: i32 = 10;
-
-    for i in 1..=k {
-        let base_number: f64 = base.pow(i as u32).into();
-        let rounded = ((x as f64 / base_number) as f64).round() * base_number;
-        x = rounded as i64;
+    let mut v: Vec<i32> = Vec::new();
+    v.push(1);
+    for i in 1..=n {
+        v.push(i as i32 * v[(i - 1) as usize]);
     }
-    println!("{}", x);
+    println!("{}", v[n as usize]);
 }
 
 // let mut v = vec![0; 2];  // 要素数2のベクタを0で初期化
